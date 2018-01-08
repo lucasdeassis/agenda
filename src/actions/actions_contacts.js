@@ -1,0 +1,36 @@
+import * as actionTypes from './constants/action_types'
+import ID from '../../utils/id'
+
+export const addContact = (contact) => {
+  contact.id = ID()
+
+  return {
+    type: actionTypes.ADD_CONTACT,
+    payload: contact
+  }
+}
+
+export const fetchContact = (id) => {
+  return {
+    type: actionTypes.FETCH_CONTACT,
+    payload: {
+      id
+    }
+  }
+}
+
+export const updateContact = (id, contact) => {
+  contact.id = id
+
+  return {
+    type: actionTypes.UPDATE_CONTACT,
+    payload: contact
+  }
+}
+
+export const fetchAllContacts = () => {
+  return {
+    type: actionTypes.FETCH_ALL_CONTACTS,
+    payload: {}
+  }
+}

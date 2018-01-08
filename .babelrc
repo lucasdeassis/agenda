@@ -1,3 +1,17 @@
 {
-  "presets": ["react", "es2015", "stage-1"]
+  "plugins": [
+    "react-hot-loader/patch",
+    "transform-es2015-arrow-functions",
+    "transform-object-rest-spread"
+  ],
+  "presets": [
+    "env",
+    "react",
+    [
+      "es2015",
+      {
+        "modules": false
+      }
+    ]
+  ]
 }

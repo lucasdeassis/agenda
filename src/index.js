@@ -1,15 +1,43 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import React from 'react'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import rootReducer from './reducers/index'
+import ReduxPromise from 'redux-promise'
+import reducers from './reducers'
+import '../style/style.css'
 
-import App from './components/app';
-import reducers from './reducers';
+import ContactsList from './components/contacts_list'
+import ContactsForm from './components/contacts_form'
+import ContactsUpdate from './components/contacts_update'
+import Navbar from './components/navbar'
 
-const createStoreWithMiddleware = applyMiddleware()(createStore);
 
-ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
-    <App />
+require('materialize-css/dist/css/materialize.css')
+window.jQuery = require('jquery')
+window.$ = require('jquery')
+require('materialize-css/dist/js/materialize.js')
+
+let store = createStore(
+  rootReducer,
+  applyMiddleware(ReduxPromise)
+)
+
+render(
+  <Provider store={store}>
+    <BrowserRouter>
+      <div>
+        <Navbar />
+        <div>
+          <Switch>
+            <Route path='/contacts/show/:id' component={ContactsUpdate} />
+            <Route path='/contacts/new' component={ContactsForm} />
+            <Route path='/contacts/:id' component={ContactsForm} />
+            <Route path='/' component={ContactsList} />
+          </Switch>
+        </div>
+      </div>
+    </BrowserRouter>
   </Provider>
-  , document.querySelector('.container'));
+  , document.getElementById('root'))
