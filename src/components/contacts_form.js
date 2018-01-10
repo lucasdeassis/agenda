@@ -8,45 +8,52 @@ import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
 export const renderNameField = (field) => {
-  const { input, label, small, medium, large,
+  const { input, label, small, medium, large, name,
     meta: { touched, error } } = field
 
   return (
-    <Col s={small} m={medium} l={large}>
-      <Input s={small} m={medium} l={large}
-        label={label} {...input} type='text' />
+    <div className={`input-field col s${small} m${medium} l${large}`} >
+      <input
+        {...input} type='text' />
       {' '}
+      <label className={input.value ? 'active' : ''} htmlFor={name}>{label}</label>
 
-      {touched && error && <span className='has-error'>{error}</span>}
-    </Col>
+      <div className={touched && error ? 'has-error' : ''}>
+        {touched ? error : ''}
+      </div>
+    </div>
   )
 }
 
 export const renderPhoneField = (field) => {
-  const { input, label, small, medium, large,
+  const { input, label, small, medium, large, name,
     meta: { touched, error } } = field
 
   return (
-    <Col s={5} m={5} l={5}>
-      <Input s={small} m={medium} l={large}
-        label={label} {...input} type='text' />
+    <div className={`input-field col s${small} m${medium} l${large}`}>
+      <input 
+        {...input} type='text' />
       {' '}
+      <label className={input.value ? 'active' : ''} htmlFor={name}>{label}</label>
 
       {touched && error && <span className='has-error'>{error}</span>}
-    </Col>
+    </div>
   )
 }
 
 export const renderEmailField = (field) => {
-  const { input, label, small, medium, large,
+  const { input, label, small, medium, large, name,
     meta: { touched, error } } = field
 
   return (
-    <Col>
-      <Input label={label} {...input} type='email' min={0} />
+    <div className={`input-field col s${small} m${medium} l${large}`}>
+      <input
+        {...input} type='text' />
       {' '}
+      <label className={input.value ? 'active' : ''} htmlFor={name}>{label}</label>
+
       {touched && error && <span className='has-error'>{error}</span>}
-    </Col>
+    </div>
   )
 }
 
@@ -59,7 +66,7 @@ export class ContactsFormComponent extends Component {
     const { contact } = this.props
 
     if (contact) {
-      this.props.initializeForm(contact)
+      this.props.initialize(contact)
     }
   }
 
@@ -68,21 +75,25 @@ export class ContactsFormComponent extends Component {
       <div>
         <div className='row'>
           <Field
-            label='Name'
+            label='First Name'
             name='name'
             id='name'
             small={4}
-            medium={5}
-            large={5}
+            medium={2}
+            large={1}
             component={renderNameField}
           />
+
+        </div>
+
+        <div className='row'>
           <Field
-            label='Surname'
+            label='Last Name'
             name='surname'
             id='surname'
             small={8}
-            medium={6}
-            large={6}
+            medium={3}
+            large={2}
             component={renderNameField}
           />
 
@@ -92,17 +103,17 @@ export class ContactsFormComponent extends Component {
           <Field
             name='email'
             label='Email'
-            small={12}
-            medium={6}
-            large={6}
+            small={6}
+            medium={3}
+            large={2}
             component={renderEmailField}
           />
           <Field
             name='phone'
             label='Phone'
-            small={12}
-            medium={6}
-            large={6}
+            small={3}
+            medium={2}
+            large={2}
             component={renderPhoneField}
           />
         </div>
@@ -157,13 +168,16 @@ const validate = (values) => {
   const errors = {}
 
   if (!values.name) {
-    errors.name = 'Enter a name!'
+    errors.name = 'please enter your first name'
   }
   if (!values.surname) {
-    errors.surname = 'Enter your surname'
+    errors.surname = 'inform your last name'
   }
+
   if (!values.email) {
-    errors.email = 'Provide your main email contact'
+    errors.email = 'provide your main email contact'
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = 'incorrect email format'
   }
 
   if (!values.phone) {

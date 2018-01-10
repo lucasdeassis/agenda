@@ -10,28 +10,32 @@ export class ContactsListComponent extends Component {
     super(props)
 
     this.state = {
-      contacts: {}
+      contacts: []
     }
   }
 
   componentDidMount() {
+    this.setState((prevState, {contacts}) => ({
+      contacts
+    }))
 
-    this.setState({
-      contacts: this.props.contacts
-    })
   }
 
   renderContacts() {
-    if (!this.state.contacts) {
+    if (!this.state.contacts.length) {
       return (
-        <div> <h6 className='center-align empty-message'> No contacts registered </h6></div>
+        <div>
+          <h6 className='center-align empty-message'>
+            No contacts registered. Add a new contact below.
+          </h6>
+        </div>
       )
     }
 
     return (
       <div className='collection col s12'>
         {
-          _.map(this.state.contacts, (contact) => {
+          this.state.contacts.map((contact) => {
             return (
               <Link key={contact.id} className='collection-item' to={`/contacts/show/${contact.id}`}>
                 {contact.name}
@@ -57,7 +61,7 @@ export class ContactsListComponent extends Component {
   }
 
   render() {
-    if (!this.props.contacts) {
+    if (!this.state.contacts) {
       return <div />
     }
 
@@ -76,7 +80,7 @@ export class ContactsListComponent extends Component {
 
           <div className='fixed-action-btn'>
             <Link to={`/contacts/new`}
-      
+
               className='waves-effect waves-light btn-floating btn-large'>
               <i className='material-icons'>person_add</i> Contact
             </Link>
@@ -89,13 +93,15 @@ export class ContactsListComponent extends Component {
 }
 
 const mapStateToProps = ({ contacts }) => {
+  const contactsList = _.values(contacts)
+
   return {
-    contacts
+    contacts: contactsList
   }
 }
 
 const ContactsList = connect(
-  mapStateToProps
+  mapStateToProps, { fetchAllContacts }
 )(ContactsListComponent)
 
 export default ContactsList

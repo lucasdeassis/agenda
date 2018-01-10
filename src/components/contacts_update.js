@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { fetchContact, updateContact } from '../actions/index'
+import { fetchContact, updateContact, deleteContact } from '../actions/index'
 import ContactsForm from './contacts_form'
 import { Row, Col, ProgressBar, Modal, Collapsible, CollapsibleItem } from 'react-materialize'
+import ContactsList from './contacts_list'
 
 export class ContactsUpdateComponent extends Component {
   constructor(props) {
@@ -16,6 +17,14 @@ export class ContactsUpdateComponent extends Component {
     const { id } = this.props.match.params
   }
 
+  deleteContact() {
+    const { id } = this.props.match.params
+    const { history , deleteContact } = this.props
+
+    deleteContact(id)
+    history.push('/')
+
+  }
 
   renderContactInfoCard() {
     const { id } = this.props.match.params
@@ -24,24 +33,36 @@ export class ContactsUpdateComponent extends Component {
     return (
       <div className='row'>
         <div className='col s12 m7 l7'>
-          <h2 className='header'>
-            {contact.name} {contact.surname}
-          </h2>
           <div className='card horizontal'>
             <div className='card-stacked'>
+
               <div className='card-content'>
-                <span className='teal-text'>
-                  <p>Email: {contact.email}
-                    Phone: {contact.phone}
-                  </p>
+                <span className="card-title teal-text"> {contact.name} {contact.surname}</span>
+                
+                <span className='teal-text block'>
+                  <i className='tiny material-icons'>mail</i> {contact.email}
                 </span>
+                <span className='teal-text block'>
+                  <i className='tiny material-icons'>phone</i> {contact.phone}
+                </span>
+
               </div>
+
               <div className='card-action'>
+
                 <div className='col s6 m6 l6'>
                   <Link className='waves-effect waves-light btn ' to={`/contacts/${id}`}>
                     <i className='material-icons left'>edit</i> Update Contact
                   </Link>
                 </div>
+
+                <div className='col s6 m6 l6'>
+                  <button onClick={this.deleteContact.bind(this)} className='waves-effect waves-light red btn hoverable' >
+                    <i className='material-icons left'>delete</i>
+                    Delete
+                  </button>
+                </div>
+
               </div>
             </div>
           </div>
@@ -56,11 +77,7 @@ export class ContactsUpdateComponent extends Component {
 
     if (!contact) {
       return (
-        <Row>
-          <Col s={12} m={12} l={12}>
-            <ProgressBar />
-          </Col>
-        </Row>
+        <ContactsList />
       )
     }
 
@@ -78,7 +95,6 @@ export class ContactsUpdateComponent extends Component {
 
         {this.renderContactInfoCard()}
 
-
       </div >
     )
   }
@@ -90,7 +106,7 @@ const mapStateToProps = ({ contacts }, ownProps) => {
 
 const ContactsUpdate = connect(
   mapStateToProps,
-  { fetchContact, updateContact })
+  { fetchContact, updateContact, deleteContact })
   (ContactsUpdateComponent)
 
 export default ContactsUpdate

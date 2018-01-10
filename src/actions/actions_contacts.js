@@ -28,9 +28,26 @@ export const updateContact = (id, contact) => {
   }
 }
 
+export const deleteContact = (id) => {
+  return {
+    type: actionTypes.DELETE_CONTACT,
+    payload: {
+      id
+    }
+  }
+}
+
 export const fetchAllContacts = () => {
   return {
     type: actionTypes.FETCH_ALL_CONTACTS,
-    payload: {}
+    payload: [
+      {
+        id: '_j8mdi7ut8',
+        name: 'Lucas',
+        surname: 'de Assis Rosa',
+        email: 'lucasassis413@gmail.com',
+        phone: '62993385991'
+      }
+    ]
   }
 }

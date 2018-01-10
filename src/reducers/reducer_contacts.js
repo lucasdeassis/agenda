@@ -20,6 +20,8 @@ const contactsReducer = (state = {}, action) => {
       }
     case actionTypes.FETCH_ALL_CONTACTS:
       return _.mapKeys(action.payload, 'id')
+    case actionTypes.DELETE_CONTACT:
+      return _.omit(state, action.payload.id)
     default:
       return state
   }
