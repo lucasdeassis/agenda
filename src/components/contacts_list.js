@@ -25,7 +25,7 @@ export class ContactsListComponent extends Component {
       return (
         <div>
           <h6 className='center-align empty-message'>
-            No contacts registered. Add a new contact below.
+            No contacts found. You may add a new contact in the right bottom corner.
           </h6>
         </div>
       )

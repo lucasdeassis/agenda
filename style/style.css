@@ -25,3 +25,11 @@ html, body {
 .block {
   display: block;
 }
+
+/* to put the btn inside a card */
+.card-fab  {
+  float: right;
+  position: relative !important;
+  left: 0px;
+  bottom: 0px;
+}
