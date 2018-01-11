@@ -1,27 +1,26 @@
-import * as actionTypes from '../actions/constants/action_types'
+import * as actionTypes from '../actions/constants/contacts_action_types'
 import _ from 'lodash'
 
 const contactsReducer = (state = {}, action) => {
+  const contactWithState = {
+    ...state,
+    [action.payload.id]: action.payload
+  }
+
   switch (action.type) {
     case actionTypes.ADD_CONTACT:
-      return {
-        ...state,
-        [action.payload.id]: action.payload
-      }
+      return contactWithState
     case actionTypes.FETCH_CONTACT:
       return {
         ...state,
-        [action.payload.id]: action.payload
+        [action.payload.id]: state[action.payload.id]
       }
     case actionTypes.UPDATE_CONTACT:
-      return {
-        ...state,
-        [action.payload.id]: action.payload
-      }
-    case actionTypes.FETCH_ALL_CONTACTS:
-      return _.mapKeys(action.payload, 'id')
+      return contactWithState
     case actionTypes.DELETE_CONTACT:
       return _.omit(state, action.payload.id)
+    case actionTypes.FETCH_ALL_CONTACTS:
+      return _.mapKeys(action.payload, 'id')
     default:
       return state
   }

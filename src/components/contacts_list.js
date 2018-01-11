@@ -1,7 +1,6 @@
 import { Row, Col, ProgressBar } from 'react-materialize'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchAllContacts } from '../actions/index'
 import { Link } from 'react-router-dom'
 import _ from 'lodash'
 
@@ -101,7 +100,7 @@ const mapStateToProps = ({ contacts }) => {
 }
 
 const ContactsList = connect(
-  mapStateToProps, { fetchAllContacts }
+  mapStateToProps, null
 )(ContactsListComponent)
 
 export default ContactsList
