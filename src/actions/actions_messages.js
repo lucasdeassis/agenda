@@ -5,11 +5,10 @@ export const addMessage = (contactId, description) => {
   return {
     type: actionTypes.ADD_MESSAGE,
     payload: {
+      messageId: ID(),
       contactId,
-      message: {
-        id: ID(),
-        description
-      }
+      description,
+      time: new Date()
     }
   }
 }
@@ -27,10 +26,9 @@ export const updateMessage = (messageId, description) => {
   return {
     type: actionTypes.UPDATE_MESSAGE,
     payload: {
-      message: {
-        id: messageId,
-        description
-      }
+      messageId,
+      description,
+      time: new Date()
     }
   }
 }
