@@ -1,4 +1,4 @@
-import * as actionTypes from './constants/action_types'
+import * as actionTypes from './constants/contacts_action_types'
 import ID from '../../utils/id'
 
 export const addContact = (contact) => {
@@ -34,20 +34,5 @@ export const deleteContact = (id) => {
     payload: {
       id
     }
-  }
-}
-
-export const fetchAllContacts = () => {
-  return {
-    type: actionTypes.FETCH_ALL_CONTACTS,
-    payload: [
-      {
-        id: '_j8mdi7ut8',
-        name: 'Lucas',
-        surname: 'de Assis Rosa',
-        email: 'lucasassis413@gmail.com',
-        phone: '62993385991'
-      }
-    ]
   }
 }
