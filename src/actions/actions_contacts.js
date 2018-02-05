@@ -1,8 +1,8 @@
 import * as actionTypes from './constants/contacts_action_types'
-import ID from '../../utils/id'
+import _ from 'lodash'
 
 export const addContact = (contact) => {
-  contact.id = ID()
+  contact.id = _.uniqueId('_')
 
   return {
     type: actionTypes.ADD_CONTACT,

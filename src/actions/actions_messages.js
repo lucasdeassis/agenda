@@ -1,11 +1,11 @@
 import * as actionTypes from './constants/messages_action_types'
-import ID from '../../utils/id'
+import _ from 'lodash'
 
 export const addMessage = (contactId, description) => {
   return {
     type: actionTypes.ADD_MESSAGE,
     payload: {
-      messageId: ID(),
+      messageId: _.uniqueId('_'),
       contactId,
       description,
       time: new Date()
