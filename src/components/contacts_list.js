@@ -61,7 +61,7 @@ export class ContactsListComponent extends Component {
 
   render() {
     if (!this.state.contacts) {
-      return <div />
+      return <div className='empty-contacts-list' />
     }
 
     return (

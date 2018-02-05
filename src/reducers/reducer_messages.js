@@ -5,7 +5,7 @@ const initialMessage = {
   '_235jbbaa2': {
     messageId: '_235jbbaa2',
     contactId: '_jy6b5zvzj',
-    description: 'Waba Laba Dub Dub!',
+    description: 'Wabba Lubba Dub Dub!',
     time: new Date(Date.UTC(2017, 3, 7, 3, 24, 0))
   }
 }
