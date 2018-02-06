@@ -7,18 +7,20 @@ export const addContactById = (payload, id) => {
     type: actionTypes.ADD_CONTACT,
     payload: {
       ...payload,
-      id: id ? id : _.uniqueId('_')  
+      id: id ? id : _.uniqueId('_')
     }
   }
 }
 
 
 export const updateContactById = (id, payload) => {
-  payload.id = id
 
   return {
     type: actionTypes.UPDATE_CONTACT,
-    payload: payload
+    payload: {
+      ...payload,
+      id
+    }
   }
 }
 
