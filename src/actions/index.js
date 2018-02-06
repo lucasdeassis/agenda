@@ -1,27 +1,23 @@
 import {
-  addContact,
-  fetchContact,
-  updateContact,
-  deleteContact
-} from './actions_contacts'
+  addContactById,
+  updateContactById,
+  deleteContactById
+} from './contact_action_creators'
 
 import {
-  addMessage,
-  fetchMessage,
-  updateMessage,
+  addMessageByContactId,
+  updateMessageById,
   deleteMessage,
   fetchAllContactMessages
-} from './actions_messages'
+} from './message_action_creators'
 
 
 export {
-  addContact,
-  fetchContact,
-  updateContact,
-  deleteContact,
-  addMessage,
-  fetchMessage,
-  updateMessage,
+  addContactById,
+  updateContactById,
+  deleteContactById,
+  addMessageByContactId,
+  updateMessageById,
   deleteMessage,
   fetchAllContactMessages
 }
