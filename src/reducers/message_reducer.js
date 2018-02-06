@@ -10,7 +10,7 @@ const initialMessage = {
   }
 }
 
-const messagesReducer = (state = initialMessage, action) => {
+const messageReducer = (state = initialMessage, action) => {
   switch (action.type) {
     case actionTypes.ADD_MESSAGE:
       return newMessage(state, action)
@@ -52,4 +52,4 @@ const messageOnList = (state, action) => {
   }
 }
 
-export default messagesReducer
+export default messageReducer

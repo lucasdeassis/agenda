@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux'
-import contactsReducer from './reducer_contacts'
-import messagesReducer from './reducer_messages'
+import contactReducer from './contact_reducer'
+import messageReducer from './message_reducer'
 import { reducer as reduxFormReducer } from 'redux-form'
 
 const rootReducer = combineReducers({
   form: reduxFormReducer,
-  contacts: contactsReducer,
-  messages: messagesReducer
+  contacts: contactReducer,
+  messages: messageReducer
 })
 
 export default rootReducer
