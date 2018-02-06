@@ -20,8 +20,8 @@ const messageReducer = (state = initialMessage, action) => {
       return updatedDescriptionMessage(state, action)
     case actionTypes.DELETE_MESSAGE:
       return _.omit(state, action.payload.messageId)
-    case actionTypes.FETCH_ALL_MESSAGES:
-      return _.mapKeys(action.payload, 'id')
+    case actionTypes.FETCH_ALL_CONTACT_MESSAGES:
+      return _.mapKeys(action.payload, 'messageId')
     default:
       return state
   }

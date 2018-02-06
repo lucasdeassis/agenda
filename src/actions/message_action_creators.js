@@ -24,7 +24,16 @@ export const updateMessageById = (messageId, description) => {
   }
 }
 
-export const deleteMessage = (messageId) => {
+export const fetchMessageById = (messageId) => {
+  return {
+    type: actionTypes.FETCH_MESSAGE,
+    payload: {
+      messageId
+    }
+  }
+}
+
+export const deleteMessageById = (messageId) => {
   return {
     type: actionTypes.DELETE_MESSAGE,
     payload: {
@@ -36,8 +45,14 @@ export const deleteMessage = (messageId) => {
 export const fetchAllContactMessages = (contactId) => {
   return {
     type: actionTypes.FETCH_ALL_CONTACT_MESSAGES,
-    payload: {
-      messageId
-    }
+    payload: contactId === '_jy6b5zvzj' ?
+      [
+        {
+          messageId: '_235jbbaa2',
+          contactId: '_jy6b5zvzj',
+          description: 'Wabba Lubba Dub Dub!',
+          time: new Date(Date.UTC(2017, 3, 7, 3, 24, 0))
+        }
+      ] : []
   }
 }

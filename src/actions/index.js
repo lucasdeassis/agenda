@@ -7,7 +7,8 @@ import {
 import {
   addMessageByContactId,
   updateMessageById,
-  deleteMessage,
+  fetchMessageById,
+  deleteMessageById,
   fetchAllContactMessages
 } from './message_action_creators'
 
@@ -18,6 +19,7 @@ export {
   deleteContactById,
   addMessageByContactId,
   updateMessageById,
-  deleteMessage,
+  fetchMessageById,
+  deleteMessageById,
   fetchAllContactMessages
 }
