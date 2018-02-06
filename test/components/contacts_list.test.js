@@ -2,15 +2,11 @@
 
 import React from 'react'
 import expect from 'expect'
-import expectJSX from 'expect-jsx'
 
 import { configure, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import { ContactsListComponent } from '../../src/components/contacts_list'
 import { Link } from 'react-router-dom'
-
-
-expect.extend(expectJSX)
 
 describe('Contact List', () => {
 

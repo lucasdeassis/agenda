@@ -37,7 +37,7 @@ export class ContactsUpdateComponent extends Component {
           <div className='card horizontal'>
             <div className='card-stacked'>
 
-              <div className='card-content'>
+              <div id="card-contact-info" className='card-content'>
 
                 <div className="row">
                   <span className="card-title teal-text col s7 m7 l7" >
@@ -63,7 +63,7 @@ export class ContactsUpdateComponent extends Component {
                 </div>
 
                 <div className='col offset-s2 s2 offset-m1 m5 offset-l2 l4'>
-                  <button
+                  <button id="delete-contact-btn"
                     onClick={this.deleteContact.bind(this)}
                     className='waves-effect waves-light red btn hoverable' >
                     <i className='material-icons left'>delete</i>
@@ -87,7 +87,7 @@ export class ContactsUpdateComponent extends Component {
       <div className="row">
         <div className="col s12 m9 l7">
           <div className="card white">
-            <div className="card-content teal-text">
+            <div id="card-contact-messages" className="card-content teal-text">
               <div className="section row">
                 <span className="card-title col s7 m7 l7">
                   <i className='material-icons left'>description</i>
@@ -98,8 +98,9 @@ export class ContactsUpdateComponent extends Component {
                 </div>
               </div>
 
-              {messages.length ? this.renderMessageList(messages) : ''}
-
+              <div id="contact-messages-list">
+                {messages.length ? this.renderMessageList(messages) : ''}
+              </div>
             </div>
           </div>
         </div>
@@ -117,7 +118,7 @@ export class ContactsUpdateComponent extends Component {
         }>
 
         <div className="row">
-          <form onSubmit={(event) => this.addContactMessage(event)} className="col s12 m12 l12 ">
+          <form id="add-contact-message-form" onSubmit={(event) => this.addContactMessage(event)} className="col s12 m12 l12 ">
             {this.renderMessageTextArea()}
 
             <button
@@ -133,10 +134,9 @@ export class ContactsUpdateComponent extends Component {
   }
 
   renderMessageList(messages) {
-
     return (
       messages.map((message, index) => (
-        <div key={index} className="section margin-top row">
+        <div key={message.messageId} className="section margin-top row">
           <div className="col s10 m10 l11">
             {`(${message.time.toLocaleString()})`} {message.description}
           </div>
@@ -151,7 +151,6 @@ export class ContactsUpdateComponent extends Component {
         </div>
       ))
     )
-
   }
 
   renderMessageOptions(message) {
@@ -168,7 +167,7 @@ export class ContactsUpdateComponent extends Component {
           }>
 
           <div className="row">
-            <form
+            <form id="update-contact-message-form"
               onSubmit={(event) => this.updateContactMessage(event, message)} className="col s12 m12 l12 ">
               {this.renderMessageTextArea(message.description)}
 
@@ -176,14 +175,14 @@ export class ContactsUpdateComponent extends Component {
                 type="submit"
                 className="right-align btn hoverable teal waves-effect waves-dark teal-lighten-1 modal-close">
                 save
-            </button>
+              </button>
             </form>
           </div>
 
         </Modal>
 
         <li>
-          <a onClick={() => this.deleteContactMessage(message)} className="btn-floating red">
+          <a onClick={() => this.deleteContactMessage(message)} id="delete-contact-message-btn" className="btn-floating red">
             <i className="material-icons">delete</i>
           </a>
         </li>
@@ -214,16 +213,19 @@ export class ContactsUpdateComponent extends Component {
   addContactMessage(event) {
     const { id } = this.props.match.params
 
-
     if (event) event.preventDefault()
 
-    this.props.addMessage(id, this.newMessageTextArea.value)
+    if (this.messageTextArea) {
+      this.props.addMessage(id, this.newMessageTextArea.value)
+    }
   }
 
   updateContactMessage(event, message) {
     if (event) event.preventDefault()
 
-    this.props.updateMessageById(message.messageId, this.messageTextArea.value)
+    if (this.messageTextArea) {
+      this.props.updateMessageById(message.messageId, this.messageTextArea.value)
+    }
 
   }
 
