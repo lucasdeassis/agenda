@@ -14,7 +14,40 @@ expect.extend(expectJSX)
 
 describe('Contact List', () => {
 
-  const propsObj = {}
+  const contactsState = [
+    {
+      id: '_jy6b5zvzj',
+      name: 'Lucas',
+      surname: 'de Assis',
+      email: 'lucasassis413@gmail.com',
+      phone: '62993385991'
+    },
+    {
+      id: '_43jks234',
+      name: 'Jorge',
+      surname: 'Hitman',
+      email: 'jorgehitman@gmail.com',
+      phone: '2343344059'
+    }
+  ]
+
+  const contactsProps = {
+    '_jy6b5zvzj': {
+      id: '_jy6b5zvzj',
+      name: 'Lucas',
+      surname: 'de Assis',
+      email: 'lucasassis413@gmail.com',
+      phone: '62993385991'
+    },
+    '_43jks234': {
+      id: '_43jks234',
+      name: 'Jorge',
+      surname: 'Hitman',
+      email: 'jorgehitman@gmail.com',
+      phone: '2343344059'
+    }
+  }
+
   let wrapper
 
   configure({ adapter: new Adapter() })
@@ -43,25 +76,39 @@ describe('Contact List', () => {
 
   it('should render contacts names links', () => {
     wrapper.setState({
-      contacts: [
-        {
-          id: '_jy6b5zvzj',
-          name: 'Lucas',
-          surname: 'de Assis',
-          email: 'lucasassis413@gmail.com',
-          phone: '62993385991'
-        },
-        {
-          id: '_43jks234',
-          name: 'Jorge',
-          surname: 'Hitman',
-          email: 'jorgehitman@gmail.com',
-          phone: '2343344059'
-        },
-      ]
+      contacts: contactsState
     })
 
+    // 2 plus person add link
     expect(wrapper.find(Link).length).toEqual(3)
+  })
+
+  it('should change contacts names list when search input changes', () => {
+
+    wrapper.setState({ contacts: contactsState })
+
+    wrapper.setProps({ contacts: contactsProps })
+
+    const searchInput = wrapper.find('#search')
+        
+    expect(wrapper.find(Link).length).toEqual(3)
+
+    searchInput.simulate('change', { target: { value: 'J' } })
+
+    // 1 plus person add link
+    expect(wrapper.find(Link).length).toEqual(2)
+
+    searchInput.simulate('change', { target: { value: 'l' } })
+
+    expect(wrapper.find(Link).length).toEqual(2)
+
+    searchInput.simulate('change', { target: { value: 'ldf' } })
+
+    expect(wrapper.find(Link).length).toEqual(1)
+
+    searchInput.simulate('change', { target: { value: 'ksd' } })
+
+    expect(wrapper.find(Link).length).toEqual(1)
   })
 
 })

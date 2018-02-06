@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { Input, Col } from 'react-materialize'
 import { connect } from 'react-redux'
-import { addContact, updateContact } from '../actions/index'
+import { addContactById, updateContactById } from '../actions/index'
 import { Link } from 'react-router-dom'
 
 import { withRouter } from 'react-router'
@@ -31,7 +31,7 @@ export const renderPhoneField = (field) => {
 
   return (
     <div className={`input-field col s${small} m${medium} l${large}`}>
-      <input 
+      <input
         {...input} type='text' />
       {' '}
       <label className={input.value ? 'active' : ''} htmlFor={name}>{label}</label>
@@ -123,14 +123,14 @@ export class ContactsFormComponent extends Component {
   }
 
   formHandledOnSubmit(values) {
-    const { contact, addContact, updateContact } = this.props
+    const { contact, addContactById, updateContactById } = this.props
 
     if (contact) {
-      updateContact(contact.id, values)
+      updateContactById(contact.id, values)
       this.props.history.push('/')
 
     } else {
-      addContact(values)
+      addContactById(values)
       this.props.history.push('/')
 
     }
@@ -201,7 +201,7 @@ const mapStateToProps = ({ contacts }, ownProps) => {
 
 ContactsForm = connect(
   mapStateToProps,
-  { addContact, updateContact }
+  { addContactById, updateContactById }
 )(ContactsForm)
 
 export default ContactsForm

@@ -5,8 +5,8 @@ import ContactsForm from './contacts_form'
 import { Modal } from 'react-materialize'
 import ContactsList from './contacts_list'
 import {
-  fetchContact, updateContact, deleteContact,
-  addMessage, updateMessage, deleteMessage, fetchAllContactMessages
+  updateContactById, deleteContactById,
+  addMessage, updateMessageById, deleteMessage, fetchAllContactMessages
 } from '../actions/index'
 
 export class ContactsUpdateComponent extends Component {
@@ -22,7 +22,7 @@ export class ContactsUpdateComponent extends Component {
     const { id } = this.props.match.params
     const { history, deleteContact } = this.props
 
-    deleteContact(id)
+    deleteContact({ id })
     history.push('/')
 
   }
@@ -40,7 +40,9 @@ export class ContactsUpdateComponent extends Component {
               <div className='card-content'>
 
                 <div className="row">
-                  <span className="card-title teal-text col s7 m7 l7" > {contact.name} {contact.surname}</span>
+                  <span className="card-title teal-text col s7 m7 l7" >
+                    {contact.name} {contact.surname}
+                  </span>
                 </div>
 
                 <span className='teal-text block'>
@@ -61,7 +63,9 @@ export class ContactsUpdateComponent extends Component {
                 </div>
 
                 <div className='col offset-s2 s2 offset-m1 m5 offset-l2 l4'>
-                  <button onClick={this.deleteContact.bind(this)} className='waves-effect waves-light red btn hoverable' >
+                  <button
+                    onClick={this.deleteContact.bind(this)}
+                    className='waves-effect waves-light red btn hoverable' >
                     <i className='material-icons left'>delete</i>
                     Delete
                   </button>
@@ -85,7 +89,10 @@ export class ContactsUpdateComponent extends Component {
           <div className="card white">
             <div className="card-content teal-text">
               <div className="section row">
-                <span className="card-title col s7 m7 l7"> <i className='material-icons left'>description</i> Notes</span>
+                <span className="card-title col s7 m7 l7">
+                  <i className='material-icons left'>description</i>
+                  Notes
+                </span>
                 <div className="col offset-s2 s1 offset-m2 m1  offset-l3 l1">
                   {this.renderAddNoteModal()}
                 </div>
@@ -113,7 +120,9 @@ export class ContactsUpdateComponent extends Component {
           <form onSubmit={(event) => this.addContactMessage(event)} className="col s12 m12 l12 ">
             {this.renderMessageTextArea()}
 
-            <button type="submit" className="right-align btn hoverable teal waves-effect waves-dark teal-lighten-1 modal-close">
+            <button
+              type="submit"
+              className="right-align btn hoverable teal waves-effect waves-dark teal-lighten-1 modal-close">
               save
           </button>
           </form>
@@ -150,15 +159,22 @@ export class ContactsUpdateComponent extends Component {
       <ul>
         <Modal header={`Edit Note`}
           trigger={
-            <li><a className="btn-floating teal" ><i className="material-icons">edit</i></a></li>
+            <li>
+              <a className="btn-floating teal" >
+                <i className="material-icons">edit</i>
+              </a>
+            </li>
 
           }>
 
           <div className="row">
-            <form onSubmit={(event) => this.updateContactMessage(event, message)} className="col s12 m12 l12 ">
+            <form
+              onSubmit={(event) => this.updateContactMessage(event, message)} className="col s12 m12 l12 ">
               {this.renderMessageTextArea(message.description)}
 
-              <button type="submit" className="right-align btn hoverable teal waves-effect waves-dark teal-lighten-1 modal-close">
+              <button
+                type="submit"
+                className="right-align btn hoverable teal waves-effect waves-dark teal-lighten-1 modal-close">
                 save
             </button>
             </form>
@@ -166,7 +182,11 @@ export class ContactsUpdateComponent extends Component {
 
         </Modal>
 
-        <li><a onClick={() => this.deleteContactMessage(message)} className="btn-floating red"><i className="material-icons">delete</i></a></li>
+        <li>
+          <a onClick={() => this.deleteContactMessage(message)} className="btn-floating red">
+            <i className="material-icons">delete</i>
+          </a>
+        </li>
       </ul>
     )
   }
@@ -183,7 +203,8 @@ export class ContactsUpdateComponent extends Component {
             }}
 
             id="textarea-message"
-            defaultValue={description || ''} className="materialize-textarea"></textarea>
+            defaultValue={description || ''} className="materialize-textarea">
+          </textarea>
           <label className="active" htmlFor="textarea-message">Message</label>
         </div>
       </div>
@@ -202,7 +223,7 @@ export class ContactsUpdateComponent extends Component {
   updateContactMessage(event, message) {
     if (event) event.preventDefault()
 
-    this.props.updateMessage(message.messageId, this.messageTextArea.value)
+    this.props.updateMessageById(message.messageId, this.messageTextArea.value)
 
   }
 
@@ -224,7 +245,9 @@ export class ContactsUpdateComponent extends Component {
 
         <div className='row'>
           <div className='col s6 m6 l6'>
-            <Link className='waves-effect waves-dark white teal-text text-lighten-1 btn' to='/'>
+            <Link
+              className='waves-effect waves-dark white teal-text text-lighten-1 btn'
+              to='/'>
               <i className='material-icons left'>navigate_before</i>
               Back
             </Link>
@@ -250,7 +273,10 @@ const mapStateToProps = ({ contacts, messages }, ownProps) => {
 
 const ContactsUpdate = connect(
   mapStateToProps,
-  { fetchContact, updateContact, deleteContact, addMessage, updateMessage, deleteMessage, fetchAllContactMessages, })
+  {
+    updateContactById, deleteContactById,
+    addMessage, updateMessageById, deleteMessage, fetchAllContactMessages,
+  })
   (ContactsUpdateComponent)
 
 export default ContactsUpdate
