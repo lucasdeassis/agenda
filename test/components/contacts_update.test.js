@@ -141,7 +141,7 @@ describe('Contacts Update', () => {
           id: contactProps._jy6b5zvzj.id
         }
       },
-      deleteContact: (message) => {},
+      deleteContactById: (message) => {},
       history: [],
       messages: messagesProps
     })
@@ -221,7 +221,7 @@ describe('Contacts Update', () => {
           id: contactProps._jy6b5zvzj.id
         }
       },
-      deleteMessage: (message) => {},
+      deleteMessageById: (message) => {},
       messages: messagesProps
     })
 

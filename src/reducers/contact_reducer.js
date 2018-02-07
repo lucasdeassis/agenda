@@ -1,5 +1,6 @@
 import * as actionTypes from '../actions/constants/contacts_action_types'
-import _ from 'lodash'
+import omit from 'lodash/omit'
+import mapKeys from 'lodash/mapKeys'
 
 const initialContact = {
   '_jy6b5zvzj': {
@@ -18,9 +19,9 @@ const contactReducer = (state = initialContact, action) => {
     case actionTypes.UPDATE_CONTACT:
       return contactWithState(state, action)
     case actionTypes.DELETE_CONTACT:
-      return _.omit(state, action.payload.id)
+      return omit(state, action.payload.id)
     case actionTypes.FETCH_ALL_CONTACTS:
-      return _.mapKeys(action.payload, 'id')
+      return mapKeys(action.payload, 'id')
     default:
       return state
   }

@@ -2,7 +2,9 @@ import { Row, Col, ProgressBar } from 'react-materialize'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import _ from 'lodash'
+import values from 'lodash/values'
+import filter from 'lodash/filter'
+
 
 export class ContactsListComponent extends Component {
   constructor(props) {
@@ -47,7 +49,7 @@ export class ContactsListComponent extends Component {
   }
 
   onSearch(event) {
-    const contactsByName = _.filter(this.props.contacts, (contact) => {
+    const contactsByName = filter(this.props.contacts, (contact) => {
       return (
         contact.name.toLowerCase().includes(event.target.value.toLowerCase()) ||
         contact.surname.toLowerCase().includes(event.target.value.toLowerCase())
@@ -92,7 +94,7 @@ export class ContactsListComponent extends Component {
 }
 
 const mapStateToProps = ({ contacts }) => {
-  const contactsList = _.values(contacts)
+  const contactsList = values(contacts)
 
   return {
     contacts: contactsList

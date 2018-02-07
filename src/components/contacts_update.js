@@ -6,8 +6,11 @@ import { Modal } from 'react-materialize'
 import ContactsList from './contacts_list'
 import {
   updateContactById, deleteContactById,
-  addMessage, updateMessageById, deleteMessage, fetchAllContactMessages
+  addMessageByContactId, updateMessageById,
+  deleteMessageById, fetchAllContactMessages
 } from '../actions/index'
+import filter from 'lodash/filter'
+
 
 export class ContactsUpdateComponent extends Component {
   constructor(props) {
@@ -20,9 +23,9 @@ export class ContactsUpdateComponent extends Component {
 
   deleteContact() {
     const { id } = this.props.match.params
-    const { history, deleteContact } = this.props
+    const { history, deleteContactById } = this.props
 
-    deleteContact({ id })
+    deleteContactById({ id })
     history.push('/')
 
   }
@@ -215,8 +218,8 @@ export class ContactsUpdateComponent extends Component {
 
     if (event) event.preventDefault()
 
-    if (this.messageTextArea) {
-      this.props.addMessage(id, this.newMessageTextArea.value)
+    if (this.newMessageTextArea) {
+      this.props.addMessageByContactId(id, this.newMessageTextArea.value)
     }
   }
 
@@ -230,7 +233,7 @@ export class ContactsUpdateComponent extends Component {
   }
 
   deleteContactMessage(message) {
-    this.props.deleteMessage(message.messageId)
+    this.props.deleteMessageById(message.messageId)
   }
 
   render() {
@@ -269,7 +272,7 @@ const mapStateToProps = ({ contacts, messages }, ownProps) => {
 
   return {
     contact: contacts[contactId],
-    messages: _.filter(messages, message => message.contactId === contactId) // only the selected contact messages as list
+    messages: filter(messages, message => message.contactId === contactId) // only the selected contact messages as list
   }
 }
 
@@ -277,7 +280,7 @@ const ContactsUpdate = connect(
   mapStateToProps,
   {
     updateContactById, deleteContactById,
-    addMessage, updateMessageById, deleteMessage, fetchAllContactMessages,
+    addMessageByContactId, updateMessageById, deleteMessageById, fetchAllContactMessages,
   })
   (ContactsUpdateComponent)
 

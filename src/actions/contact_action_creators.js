@@ -1,5 +1,5 @@
 import * as actionTypes from './constants/contacts_action_types'
-import _ from 'lodash'
+import uniqueId from 'lodash/uniqueId'
 
 export const addContactById = (payload, id) => {
 
@@ -7,7 +7,7 @@ export const addContactById = (payload, id) => {
     type: actionTypes.ADD_CONTACT,
     payload: {
       ...payload,
-      id: id ? id : _.uniqueId('_')
+      id: id ? id : uniqueId('_')
     }
   }
 }

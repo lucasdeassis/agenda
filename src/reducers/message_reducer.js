@@ -1,5 +1,6 @@
 import * as actionTypes from '../actions/constants/messages_action_types'
-import _ from 'lodash'
+import omit from 'lodash/omit'
+import mapKeys from 'lodash/mapKeys'
 
 const initialMessage = {
   '_235jbbaa2': {
@@ -19,9 +20,9 @@ const messageReducer = (state = initialMessage, action) => {
     case actionTypes.UPDATE_MESSAGE:
       return updatedDescriptionMessage(state, action)
     case actionTypes.DELETE_MESSAGE:
-      return _.omit(state, action.payload.messageId)
+      return omit(state, action.payload.messageId)
     case actionTypes.FETCH_ALL_CONTACT_MESSAGES:
-      return _.mapKeys(action.payload, 'messageId')
+      return mapKeys(action.payload, 'messageId')
     default:
       return state
   }
