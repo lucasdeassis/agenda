@@ -1,18 +1,15 @@
 /* global beforeEach, describe, it, expect */
 
 import React from 'react'
-import expect from 'expect'
 
 import { configure, shallow } from 'enzyme'
 import sinon from 'sinon'
 import Adapter from 'enzyme-adapter-react-16'
 import { ContactsUpdateComponent } from '../../src/components/contacts_update'
-import { Link } from 'react-router-dom'
 import ContactsList from '../../src/components/contacts_list'
 import { Modal } from 'react-materialize'
 
 describe('Contacts Update', () => {
-
   const contactProps = {
     '_jy6b5zvzj': {
       id: '_jy6b5zvzj',
@@ -198,7 +195,7 @@ describe('Contacts Update', () => {
       messages: messagesProps
     })
 
-    expect(  wrapper.find('#update-contact-message-form').length).toEqual(1)
+    expect(wrapper.find('#update-contact-message-form').length).toEqual(1)
 
     wrapper.find('#update-contact-message-form').simulate('submit')
     expect(spy.calledOnce).toEqual(true)
@@ -225,12 +222,11 @@ describe('Contacts Update', () => {
       messages: messagesProps
     })
 
-    expect(  wrapper.find('#delete-contact-message-btn').length).toEqual(1)
+    expect(wrapper.find('#delete-contact-message-btn').length).toEqual(1)
 
     wrapper.find('#delete-contact-message-btn').simulate('click')
     expect(spy.calledOnce).toEqual(true)
 
     spy.restore()
   })
-
 })

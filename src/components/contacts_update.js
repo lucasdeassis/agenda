@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import ContactsForm from './contacts_form'
 import { Modal } from 'react-materialize'
 import ContactsList from './contacts_list'
 import {
@@ -11,9 +10,8 @@ import {
 } from '../actions/index'
 import filter from 'lodash/filter'
 
-
 export class ContactsUpdateComponent extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -21,16 +19,15 @@ export class ContactsUpdateComponent extends Component {
     }
   }
 
-  deleteContact() {
+  deleteContact () {
     const { id } = this.props.match.params
     const { history, deleteContactById } = this.props
 
     deleteContactById({ id })
     history.push('/')
-
   }
 
-  renderContactInfoCard() {
+  renderContactInfoCard () {
     const { id } = this.props.match.params
     const { contact } = this.props
 
@@ -40,10 +37,10 @@ export class ContactsUpdateComponent extends Component {
           <div className='card horizontal'>
             <div className='card-stacked'>
 
-              <div id="card-contact-info" className='card-content'>
+              <div id='card-contact-info' className='card-content'>
 
-                <div className="row">
-                  <span className="card-title teal-text col s7 m7 l7" >
+                <div className='row'>
+                  <span className='card-title teal-text col s7 m7 l7' >
                     {contact.name} {contact.surname}
                   </span>
                 </div>
@@ -66,7 +63,7 @@ export class ContactsUpdateComponent extends Component {
                 </div>
 
                 <div className='col offset-s2 s2 offset-m1 m5 offset-l2 l4'>
-                  <button id="delete-contact-btn"
+                  <button id='delete-contact-btn'
                     onClick={this.deleteContact.bind(this)}
                     className='waves-effect waves-light red btn hoverable' >
                     <i className='material-icons left'>delete</i>
@@ -83,25 +80,25 @@ export class ContactsUpdateComponent extends Component {
     )
   }
 
-  renderContactMessages() {
+  renderContactMessages () {
     const { messages } = this.props
 
     return (
-      <div className="row">
-        <div className="col s12 m9 l7">
-          <div className="card white">
-            <div id="card-contact-messages" className="card-content teal-text">
-              <div className="section row">
-                <span className="card-title col s7 m7 l7">
+      <div className='row'>
+        <div className='col s12 m9 l7'>
+          <div className='card white'>
+            <div id='card-contact-messages' className='card-content teal-text'>
+              <div className='section row'>
+                <span className='card-title col s7 m7 l7'>
                   <i className='material-icons left'>description</i>
                   Notes
                 </span>
-                <div className="col offset-s2 s1 offset-m2 m1  offset-l3 l1">
+                <div className='col offset-s2 s1 offset-m2 m1  offset-l3 l1'>
                   {this.renderAddNoteModal()}
                 </div>
               </div>
 
-              <div id="contact-messages-list">
+              <div id='contact-messages-list'>
                 {messages.length ? this.renderMessageList(messages) : ''}
               </div>
             </div>
@@ -111,22 +108,22 @@ export class ContactsUpdateComponent extends Component {
     )
   }
 
-  renderAddNoteModal() {
+  renderAddNoteModal () {
     return (
       <Modal header={`Add Note`}
         trigger={
-          <button className=" waves-effect hoverable teal btn ">
+          <button className=' waves-effect hoverable teal btn '>
             Add
          </button>
         }>
 
-        <div className="row">
-          <form id="add-contact-message-form" onSubmit={(event) => this.addContactMessage(event)} className="col s12 m12 l12 ">
+        <div className='row'>
+          <form id='add-contact-message-form' onSubmit={(event) => this.addContactMessage(event)} className='col s12 m12 l12 '>
             {this.renderMessageTextArea()}
 
             <button
-              type="submit"
-              className="right-align btn hoverable teal waves-effect waves-dark teal-lighten-1 modal-close">
+              type='submit'
+              className='right-align btn hoverable teal waves-effect waves-dark teal-lighten-1 modal-close'>
               save
           </button>
           </form>
@@ -136,17 +133,17 @@ export class ContactsUpdateComponent extends Component {
     )
   }
 
-  renderMessageList(messages) {
+  renderMessageList (messages) {
     return (
       messages.map((message, index) => (
-        <div key={message.messageId} className="section margin-top row">
-          <div className="col s10 m10 l11">
+        <div key={message.messageId} className='section margin-top row'>
+          <div className='col s10 m10 l11'>
             {`(${message.time.toLocaleString()})`} {message.description}
           </div>
 
-          <div className="card-fab fixed-action-btn horizontal click-to-toggle">
-            <a className="btn-floating btn yellow darken-4 ">
-              <i className="material-icons">menu</i>
+          <div className='card-fab fixed-action-btn horizontal click-to-toggle'>
+            <a className='btn-floating btn yellow darken-4 '>
+              <i className='material-icons'>menu</i>
             </a>
 
             {this.renderMessageOptions(message)}
@@ -156,27 +153,27 @@ export class ContactsUpdateComponent extends Component {
     )
   }
 
-  renderMessageOptions(message) {
+  renderMessageOptions (message) {
     return (
       <ul>
         <Modal header={`Edit Note`}
           trigger={
             <li>
-              <a className="btn-floating teal" >
-                <i className="material-icons">edit</i>
+              <a className='btn-floating teal' >
+                <i className='material-icons'>edit</i>
               </a>
             </li>
 
           }>
 
-          <div className="row">
-            <form id="update-contact-message-form"
-              onSubmit={(event) => this.updateContactMessage(event, message)} className="col s12 m12 l12 ">
+          <div className='row'>
+            <form id='update-contact-message-form'
+              onSubmit={(event) => this.updateContactMessage(event, message)} className='col s12 m12 l12 '>
               {this.renderMessageTextArea(message.description)}
 
               <button
-                type="submit"
-                className="right-align btn hoverable teal waves-effect waves-dark teal-lighten-1 modal-close">
+                type='submit'
+                className='right-align btn hoverable teal waves-effect waves-dark teal-lighten-1 modal-close'>
                 save
               </button>
             </form>
@@ -185,35 +182,34 @@ export class ContactsUpdateComponent extends Component {
         </Modal>
 
         <li>
-          <a onClick={() => this.deleteContactMessage(message)} id="delete-contact-message-btn" className="btn-floating red">
-            <i className="material-icons">delete</i>
+          <a onClick={() => this.deleteContactMessage(message)} id='delete-contact-message-btn' className='btn-floating red'>
+            <i className='material-icons'>delete</i>
           </a>
         </li>
       </ul>
     )
   }
 
-  renderMessageTextArea(description) {
+  renderMessageTextArea (description) {
     return (
-      <div className="row">
-        <div className="input-field col s12">
+      <div className='row'>
+        <div className='input-field col s12'>
           <textarea
             ref={element => {
-              description ?
-                this.messageTextArea = element :
-                this.newMessageTextArea = element
+              description
+                ? this.messageTextArea = element
+                : this.newMessageTextArea = element
             }}
 
-            id="textarea-message"
-            defaultValue={description || ''} className="materialize-textarea">
-          </textarea>
-          <label className="active" htmlFor="textarea-message">Message</label>
+            id='textarea-message'
+            defaultValue={description || ''} className='materialize-textarea' />
+          <label className='active' htmlFor='textarea-message'>Message</label>
         </div>
       </div>
     )
   }
 
-  addContactMessage(event) {
+  addContactMessage (event) {
     const { id } = this.props.match.params
 
     if (event) event.preventDefault()
@@ -223,20 +219,19 @@ export class ContactsUpdateComponent extends Component {
     }
   }
 
-  updateContactMessage(event, message) {
+  updateContactMessage (event, message) {
     if (event) event.preventDefault()
 
     if (this.messageTextArea) {
       this.props.updateMessageById(message.messageId, this.messageTextArea.value)
     }
-
   }
 
-  deleteContactMessage(message) {
+  deleteContactMessage (message) {
     this.props.deleteMessageById(message.messageId)
   }
 
-  render() {
+  render () {
     const { contact } = this.props
 
     if (!contact) {
@@ -279,9 +274,12 @@ const mapStateToProps = ({ contacts, messages }, ownProps) => {
 const ContactsUpdate = connect(
   mapStateToProps,
   {
-    updateContactById, deleteContactById,
-    addMessageByContactId, updateMessageById, deleteMessageById, fetchAllContactMessages,
-  })
-  (ContactsUpdateComponent)
+    updateContactById,
+    deleteContactById,
+    addMessageByContactId,
+    updateMessageById,
+    deleteMessageById,
+    fetchAllContactMessages
+  })(ContactsUpdateComponent)
 
 export default ContactsUpdate

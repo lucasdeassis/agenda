@@ -5,7 +5,7 @@ export const addMessageByContactId = (contactId, description, messageId) => {
   return {
     type: actionTypes.ADD_MESSAGE,
     payload: {
-      messageId: messageId ? messageId : uniqueId('_'),
+      messageId: messageId || uniqueId('_'),
       contactId,
       description,
       time: new Date()
@@ -45,8 +45,8 @@ export const deleteMessageById = (messageId) => {
 export const fetchAllContactMessages = (contactId) => {
   return {
     type: actionTypes.FETCH_ALL_CONTACT_MESSAGES,
-    payload: contactId === '_jy6b5zvzj' ?
-      [
+    payload: contactId === '_jy6b5zvzj'
+      ? [
         {
           messageId: '_235jbbaa2',
           contactId: '_jy6b5zvzj',

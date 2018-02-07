@@ -1,4 +1,4 @@
-/* global test, expect */
+/* global it, describe, expect */
 
 import contactReducer from '../../src/reducers/contact_reducer'
 import deepFreeze from 'deep-freeze'
@@ -6,7 +6,6 @@ import { createStore } from 'redux'
 import { addContactById, updateContactById, deleteContactById } from '../../src/actions/index'
 
 describe('contactReducer', () => {
-
   const stateBefore = () => {
     return {
       '_jy6b5zvzj': {
@@ -130,11 +129,10 @@ describe('contactReducer', () => {
     deepFreeze(action)
 
     expect(contactReducer(stateBefore(), action)).toEqual(stateAfter)
-
   })
 
   it('should delete contact by id', () => {
-    const action = deleteContactById( {id: '_43jks234' })
+    const action = deleteContactById({id: '_43jks234'})
 
     const stateAfter = {
       '_jy6b5zvzj': {
@@ -150,6 +148,5 @@ describe('contactReducer', () => {
     deepFreeze(action)
 
     expect(contactReducer(stateBefore(), action)).toEqual(stateAfter)
-
   })
 })

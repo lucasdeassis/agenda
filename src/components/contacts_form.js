@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
-import { Input, Col } from 'react-materialize'
 import { connect } from 'react-redux'
 import { addContactById, updateContactById } from '../actions/index'
 import { Link } from 'react-router-dom'
@@ -58,11 +57,7 @@ export const renderEmailField = (field) => {
 }
 
 export class ContactsFormComponent extends Component {
-  constructor(props) {
-    super(props)
-  }
-
-  componentDidMount() {
+  componentDidMount () {
     const { contact } = this.props
 
     if (contact) {
@@ -70,7 +65,7 @@ export class ContactsFormComponent extends Component {
     }
   }
 
-  personFields() {
+  personFields () {
     return (
       <div>
         <div className='row'>
@@ -122,21 +117,19 @@ export class ContactsFormComponent extends Component {
     )
   }
 
-  formHandledOnSubmit(values) {
+  formHandledOnSubmit (values) {
     const { contact, addContactById, updateContactById } = this.props
 
     if (contact) {
       updateContactById(contact.id, values)
       this.props.history.push('/')
-
     } else {
       addContactById(values)
       this.props.history.push('/')
-
     }
   }
 
-  render() {
+  render () {
     // from redux-form
     const { handleSubmit } = this.props
 
@@ -193,7 +186,6 @@ let ContactsForm = reduxForm({
   validate,
   form: 'ContactsForm'
 })(ContactsFormComponentWithRouter)
-
 
 const mapStateToProps = ({ contacts }, ownProps) => {
   return { contact: contacts[ownProps.match.params.id] }

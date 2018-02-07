@@ -2,19 +2,16 @@ import * as actionTypes from './constants/contacts_action_types'
 import uniqueId from 'lodash/uniqueId'
 
 export const addContactById = (payload, id) => {
-
   return {
     type: actionTypes.ADD_CONTACT,
     payload: {
       ...payload,
-      id: id ? id : uniqueId('_')
+      id: id || uniqueId('_')
     }
   }
 }
 
-
 export const updateContactById = (id, payload) => {
-
   return {
     type: actionTypes.UPDATE_CONTACT,
     payload: {

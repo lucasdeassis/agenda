@@ -5,14 +5,12 @@ import { createStore, applyMiddleware } from 'redux'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import rootReducer from './reducers/index'
 import ReduxPromise from 'redux-promise'
-import reducers from './reducers'
 import '../style/style.css'
 
 import ContactsList from './components/contacts_list'
 import ContactsForm from './components/contacts_form'
 import ContactsUpdate from './components/contacts_update'
 import Navbar from './components/navbar'
-
 
 require('materialize-css/dist/css/materialize.css')
 window.jQuery = require('jquery')

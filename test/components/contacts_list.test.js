@@ -1,7 +1,6 @@
 /* global beforeEach, describe, it, expect */
 
 import React from 'react'
-import expect from 'expect'
 
 import { configure, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
@@ -9,7 +8,6 @@ import { ContactsListComponent } from '../../src/components/contacts_list'
 import { Link } from 'react-router-dom'
 
 describe('Contact List', () => {
-
   const contactsState = [
     {
       id: '_jy6b5zvzj',
@@ -49,7 +47,6 @@ describe('Contact List', () => {
   configure({ adapter: new Adapter() })
 
   beforeEach(() => {
-
     wrapper = shallow(
       <ContactsListComponent />)
   })
@@ -80,13 +77,12 @@ describe('Contact List', () => {
   })
 
   it('should change contacts names list when search input changes', () => {
-
     wrapper.setState({ contacts: contactsState })
 
     wrapper.setProps({ contacts: contactsProps })
 
     const searchInput = wrapper.find('#search')
-        
+
     expect(wrapper.find(Link).length).toEqual(3)
 
     searchInput.simulate('change', { target: { value: 'J' } })
@@ -106,5 +102,4 @@ describe('Contact List', () => {
 
     expect(wrapper.find(Link).length).toEqual(1)
   })
-
 })

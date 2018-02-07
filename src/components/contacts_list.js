@@ -1,13 +1,11 @@
-import { Row, Col, ProgressBar } from 'react-materialize'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import values from 'lodash/values'
 import filter from 'lodash/filter'
 
-
 export class ContactsListComponent extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -15,14 +13,13 @@ export class ContactsListComponent extends Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.setState((prevState, {contacts}) => ({
       contacts
     }))
-
   }
 
-  renderContacts() {
+  renderContacts () {
     if (!this.state.contacts.length) {
       return (
         <div>
@@ -48,7 +45,7 @@ export class ContactsListComponent extends Component {
     )
   }
 
-  onSearch(event) {
+  onSearch (event) {
     const contactsByName = filter(this.props.contacts, (contact) => {
       return (
         contact.name.toLowerCase().includes(event.target.value.toLowerCase()) ||
@@ -61,7 +58,7 @@ export class ContactsListComponent extends Component {
     })
   }
 
-  render() {
+  render () {
     if (!this.state.contacts) {
       return <div className='empty-contacts-list' />
     }

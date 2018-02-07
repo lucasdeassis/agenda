@@ -12,7 +12,6 @@ import {
   fetchAllContactMessages
 } from './message_action_creators'
 
-
 export {
   addContactById,
   updateContactById,

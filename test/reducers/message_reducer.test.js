@@ -1,8 +1,7 @@
-/* global test, expect */
+/* global it, describe, expect */
 import messageReducer from '../../src/reducers/message_reducer'
 import deepFreeze from 'deep-freeze'
 import { createStore } from 'redux'
-import { addMessage } from '../../src/actions/message_action_creators'
 import {
   addMessageByContactId,
   updateMessageById,
@@ -69,9 +68,8 @@ describe('messageReducer', () => {
     expect(messageReducer(stateBefore(), action)).toEqual(stateAfter)
   })
 
-
   it('should update description with new message by id', () => {
-    const action = updateMessageById('_235jbbaa2', `I'M PICKLE RICK!!!`, )
+    const action = updateMessageById('_235jbbaa2', `I'M PICKLE RICK!!!`)
     const stateAfter = {
       '_235jbbaa2': {
         messageId: '_235jbbaa2',
@@ -135,7 +133,7 @@ describe('messageReducer', () => {
     deepFreeze(stateBeforeFetchById)
     deepFreeze(action)
 
-    expect(messageReducer(stateBeforeFetchById, action)).toEqual(stateBeforeFetchById)   
+    expect(messageReducer(stateBeforeFetchById, action)).toEqual(stateBeforeFetchById)
   })
 
   it('should fetch all contact messages by the given id', () => {
@@ -165,5 +163,4 @@ describe('messageReducer', () => {
 
     expect(messageReducer(stateBeforeAll, action)).toEqual(stateAfter)
   })
-
 })
